@@ -46,7 +46,7 @@ namespace yolov3
             // Session Options
             using SessionOptions options = new SessionOptions();
             options.LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_INFO;
-            options.AppendExecutionProvider_OpenVINO(@"MYRIAD_FP16");
+            options.AppendExecutionProvider_OpenVINO(@"CPU");
             options.AppendExecutionProvider_CPU(1);
 
             // Load the model
@@ -191,31 +191,6 @@ namespace yolov3
                 }
             }
 
-            // Put boxes, labels and confidence on image and save for viewing
-            using var outputImage = File.OpenWrite(outImageFilePath);
-            Font font = SystemFonts.CreateFont("Arial", 16);
-            foreach (var p in predictions)
-            {
-                imageOrg.Mutate(x =>
-                {
-                    x.DrawLines(Color.Red, 2f, new PointF[] {
-
-                        new PointF(p.Box.Xmin, p.Box.Ymin),
-                        new PointF(p.Box.Xmax, p.Box.Ymin),
-
-                        new PointF(p.Box.Xmax, p.Box.Ymin),
-                        new PointF(p.Box.Xmax, p.Box.Ymax),
-
-                        new PointF(p.Box.Xmax, p.Box.Ymax),
-                        new PointF(p.Box.Xmin, p.Box.Ymax),
-
-                        new PointF(p.Box.Xmin, p.Box.Ymax),
-                        new PointF(p.Box.Xmin, p.Box.Ymin)
-                    });
-                    x.DrawText($"{p.Class}, {p.Score:0.00}", font, Color.White, new PointF(p.Box.Xmin, p.Box.Ymin));
-                });
-            }
-            imageOrg.Save(outputImage, new JpegEncoder());
 
         }
     }
