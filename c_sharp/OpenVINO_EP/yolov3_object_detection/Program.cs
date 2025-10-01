@@ -46,7 +46,11 @@ namespace yolov3
             // Session Options
             using SessionOptions options = new SessionOptions();
             options.LogSeverityLevel = OrtLoggingLevel.ORT_LOGGING_LEVEL_INFO;
-            options.AppendExecutionProvider_OpenVINO(@"CPU");
+            var providerOptions = new Dictionary<string, string>
+            {
+             { "device_type", "CPU" }
+            };
+            options.AppendExecutionProvider_OpenVINO_V2(providerOptions);
             options.AppendExecutionProvider_CPU(1);
 
             // Load the model

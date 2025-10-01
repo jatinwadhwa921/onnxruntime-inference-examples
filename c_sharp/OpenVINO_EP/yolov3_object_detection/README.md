@@ -2,7 +2,7 @@
 
 1. The object detection sample uses YOLOv3 Deep Learning ONNX Model from the ONNX Model Zoo.
 
-2. The sample involves presenting an image to the ONNX Runtime (RT), which uses the OpenVINO Execution Provider for ONNX RT to run inference on Intel<sup>®</sup> NCS2 stick (MYRIADX device). The sample uses ImageSharp for image processing and ONNX Runtime OpenVINO EP for inference.
+2. The sample involves presenting an image to the ONNX Runtime (RT), which uses the OpenVINO Execution Provider for ONNX RT to run inference on Intel devices<sup>®</sup>. The sample uses ImageSharp for image processing and ONNX Runtime OpenVINO EP for inference.
 
 The source code for this sample is available [here](https://github.com/microsoft/onnxruntime-inference-examples/tree/main/c_sharp/OpenVINO_EP/yolov3_object_detection).
 
@@ -25,7 +25,7 @@ The source code for this sample is available [here](https://github.com/microsoft
 
 To build nuget packages of onnxruntime with openvino flavour
     ```
-    ./build.sh --config Release --use_openvino MYRIAD_FP16 --build_shared_lib --build_nuget
+    ./build.sh --config Release --use_openvino CPU --build_shared_lib --build_nuget
     ```
 ## Build the sample C# Application
 1. Create a new console project
@@ -39,7 +39,7 @@ To build nuget packages of onnxruntime with openvino flavour
          1. Open the Visual C# Project file (.csproj) using VS22.
          2. Right click on project, navigate to manage Nuget Packages.
          3. Install SixLabors.ImageSharp, SixLabors.Core, SixLabors.Fonts and SixLabors.ImageSharp.Drawing Packages from nuget.org.
-         4. Install Microsoft.ML.OnnxRuntime.Managed and Microsoft.ML.OnnxRuntime.Openvino from your build directory nuget-artifacts.
+         4. Install Microsoft.ML.OnnxRuntime.Managed and Intel.ML.OnnxRuntime.Openvino from your build directory nuget-artifacts.
      * Using cmd
          ```
          mkdir [source-folder]
@@ -48,7 +48,7 @@ To build nuget packages of onnxruntime with openvino flavour
          dotnet add package SixLabors.Fonts
          dotnet add package SixLabors.ImageSharp.Drawing
          ```
-         Add Microsoft.ML.OnnxRuntime.Managed and Microsoft.ML.OnnxRuntime.Openvino packages.
+         Add Microsoft.ML.OnnxRuntime.Managed and Intel.ML.OnnxRuntime.Openvino packages.
          ```
          nuget add [path-to-nupkg] -Source [source-path]
          dotnet add package [nuget=package-name] -v [package-version] -s [source-path]
